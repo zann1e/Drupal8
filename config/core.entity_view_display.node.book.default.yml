@@ -1,0 +1,29 @@
+uuid: 04333245-0618-41d4-b1f3-7a55a75ee993
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.book.body
+    - node.type.book
+  module:
+    - text
+    - user
+id: node.book.default
+targetEntityType: node
+bundle: book
+mode: default
+content:
+  body:
+    label: hidden
+    type: text_default
+    weight: 101
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  links:
+    weight: 100
+    region: content
+  my_own_pseudo_field:
+    weight: 100
+    region: content
+hidden: {  }
