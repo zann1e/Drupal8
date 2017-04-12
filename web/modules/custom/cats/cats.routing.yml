@@ -1,0 +1,7 @@
+cats.api:
+  path: '/cats'
+  defaults:
+    _form:  '\Drupal\cats\Form\CatsAddMore'
+    _title: 'Cats API'
+  requirements:
+    _permission: 'access content'

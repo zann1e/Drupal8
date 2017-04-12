@@ -1,0 +1,48 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the Voting module.
+ */
+
+/**
+ * Implements hook_schema().
+ */
+
+function voting_schema() {
+  $schema['voting'] = array(
+    'description' => 'Likes Dislikes.',
+    'fields' => array(
+
+      'uid' => array(
+        'description' => 'User ID',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+      ),
+
+      'nid' => array(
+        'description' => 'Node ID',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+
+      'vote' => array(
+        'description' => 'Like [1] Dislike [-1]',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+
+
+
+
+    ),
+    'indexes' => array(
+      'nid' => array('nid'),
+    ),
+
+  );
+  return $schema;
+}

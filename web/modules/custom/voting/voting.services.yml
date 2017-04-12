@@ -1,0 +1,4 @@
+services:
+  zann.voting:
+    class: Drupal\voting\ZannVotingService
+    arguments: ['@database']

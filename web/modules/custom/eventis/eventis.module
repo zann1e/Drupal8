@@ -1,0 +1,58 @@
+<?php
+
+
+function eventis_vote_liked(\Drupal\voting\Event\VoteEvent $event) {
+
+  $uid = \Drupal::currentUser()->id();
+  $value = \Drupal::service('user.data')
+    ->get('eventis', $uid, 'show_like_dislike');
+
+  if ($value == 1) {
+    drupal_set_message("Via 'eventis_vote_liked' hook: " . $event->getUser() . " " . $event->getVoteType() . " " . $event->getTitle());
+  }
+}
+
+function eventis_vote_disliked(\Drupal\voting\Event\VoteEvent $event){
+
+    $uid = \Drupal::currentUser()->id();
+    $value =  \Drupal::service('user.data')->get('eventis', $uid, 'show_like_dislike');
+
+    if($value == 1) {
+      drupal_set_message("Via 'eventis_vote_disliked' hook:  " . $event->getUser() . " " . $event->getVoteType() . " " . $event->getTitle());
+    }
+}
+
+/**
+ * Implements hook_form_alter().
+ */
+function eventis_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+
+    if($form_id == "user_form"){
+
+      $user = Drupal::routeMatch()->getParameters();
+      $uid = $user->get('user')->id();
+      $value =  \Drupal::service('user.data')->get('eventis', $uid, 'show_like_dislike');
+
+      $form['account']['show_like_dislike'] = [
+          '#type' => 'checkbox',
+          '#title' => t('Show Like\Dislike notifications'),
+          '#default_value' => $value,
+      ];
+
+      $form['actions']['submit']['#submit'][] = 'eventis_form_submit_handler';
+    }
+
+}
+
+
+function eventis_form_submit_handler(&$form, \Drupal\Core\Form\FormStateInterface $form_state) {
+
+  $value = $form_state->getValue('show_like_dislike');
+
+  $user = Drupal::routeMatch()->getParameters();
+  $uid = $user->get('user')->id();
+
+  \Drupal::service('user.data')->set('eventis', $uid, 'show_like_dislike', $value);
+
+
+}

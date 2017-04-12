@@ -1,0 +1,5 @@
+name: Eventis
+description: Eventis subscriber module.
+core: '8.x'
+package: Event Subscriber
+type: module

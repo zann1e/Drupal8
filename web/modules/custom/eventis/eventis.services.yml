@@ -1,0 +1,7 @@
+services:
+  eventis_subscriber:
+    class: Drupal\eventis\EventSubscriber\EventisSubscriber
+    tags:
+      - {name: event_subscriber}
+  eventis_notification:
+    class: Drupal\eventis\LikeDislikeNotificationService

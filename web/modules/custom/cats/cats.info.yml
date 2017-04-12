@@ -1,0 +1,5 @@
+name: API Cats
+type: module
+description: 'Cats API module'
+package: Cats API module
+core: '8.x'
